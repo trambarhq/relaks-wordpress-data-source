@@ -1272,7 +1272,7 @@ function getFolderURL(url) {
  * @return {String}
  */
 function attachPageNumber(url, page) {
-    return (page >= 1) ? attachURLParameter(url, 'page', page) : url;
+    return attachURLParameter(url, 'page', page || 1);
 }
 
 function attachURLParameter(url, name, value) {
