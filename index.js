@@ -5,8 +5,6 @@ var defaultOptions = {
     baseURL: '',
     permalinks: true,
     refreshInterval: 0,
-    authorizationKeyword: 'Token',
-    abbreviatedFolderContents: false,
     fetchFunc: null,
 };
 
@@ -1274,7 +1272,7 @@ function getFolderURL(url) {
  * @return {String}
  */
 function attachPageNumber(url, page) {
-    return (page > 1) ? attachURLParameter(url, 'page', page) : url;
+    return (page >= 1) ? attachURLParameter(url, 'page', page) : url;
 }
 
 function attachURLParameter(url, name, value) {
