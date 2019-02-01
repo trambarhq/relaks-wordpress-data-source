@@ -254,7 +254,10 @@ prototype.fetchNextPage = function(query, initial) {
     }
     var _this = this;
     var time = getTime();
-    var nextURL = attachPageNumber(query.url, query.nextPage);
+    var perPage = 10;
+    var page = query.nextPage || 1;
+    var expectedCount = perPage * page;
+    var nextURL = attachPageNumber(query.url, page);
     var nextPromise = this.get(nextURL).then(function(response) {
         // append retrieved objects to list
         var total = response.total;
@@ -270,7 +273,7 @@ prototype.fetchNextPage = function(query, initial) {
         _this.processFreshObjects(freshObjects, nextURL, query, initial);
 
         // attach function to results so caller can ask for more results
-        if (objects.length < total && freshObjects.length > 0) {
+        if (expectedCount < total && freshObjects.length > 0) {
             objects.more = _this.fetchNextPage.bind(_this, query, false);
             objects.total = total;
 
