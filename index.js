@@ -583,8 +583,8 @@ prototype.refreshList = function(query) {
 
         var refreshedObjects;
         var pageRemaining = query.nextPage - 1;
-        var nextURL = query.url;
         var nextPage = 1;
+        var nextURL = attachPageNumber(query.url, nextPage);
 
         var refreshNextPage = function() {
             return _this.get(nextURL).then(function(response) {
