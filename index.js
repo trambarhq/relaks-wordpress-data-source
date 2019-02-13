@@ -568,7 +568,7 @@ prototype.refreshList = function(query) {
     // wait for any call to more() to finish first
     (query.nextPromise || Promise.resolve()).then(function() {
         // suppress fetching of additional pages for the time being
-        var oldObjects = query.objects;
+        var oldObjects = query.objects || [];
         var morePromise, moreResolve, moreReject;
         var fetchMoreAfterward = function() {
             if (!morePromise) {
