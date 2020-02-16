@@ -1520,6 +1520,23 @@ function getTime(delta) {
   return date.toISOString();
 }
 
+/**
+ * Remove objects from the given array
+ *
+ * @param  {Array} list
+ * @param  {Array} objects
+ */
+function pullObjects(list, objects) {
+  if (objects instanceof Array) {
+    for (let object of objects) {
+      const index = list.indexOf(object);
+      if (index !== -1) {
+        list.splice(index, 1);
+      }
+    }
+  }
+}
+
 export {
   RelaksWordpressDataSource,
   RelaksWordpressDataSource as DataSource,

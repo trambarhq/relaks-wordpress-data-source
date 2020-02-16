@@ -2604,6 +2604,45 @@
 
     return date.toISOString();
   }
+  /**
+   * Remove objects from the given array
+   *
+   * @param  {Array} list
+   * @param  {Array} objects
+   */
+
+
+  function pullObjects(list, objects) {
+    if (objects instanceof Array) {
+      var _iteratorNormalCompletion16 = true;
+      var _didIteratorError16 = false;
+      var _iteratorError16 = undefined;
+
+      try {
+        for (var _iterator16 = objects[Symbol.iterator](), _step16; !(_iteratorNormalCompletion16 = (_step16 = _iterator16.next()).done); _iteratorNormalCompletion16 = true) {
+          var object = _step16.value;
+          var index = list.indexOf(object);
+
+          if (index !== -1) {
+            list.splice(index, 1);
+          }
+        }
+      } catch (err) {
+        _didIteratorError16 = true;
+        _iteratorError16 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion16 && _iterator16["return"] != null) {
+            _iterator16["return"]();
+          }
+        } finally {
+          if (_didIteratorError16) {
+            throw _iteratorError16;
+          }
+        }
+      }
+    }
+  }
 
   var RelaksWordpressDataSourceProxy =
   /*#__PURE__*/
