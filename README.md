@@ -19,11 +19,11 @@ npm --save-dev install relaks-wordpress-data-source
 ## Usage
 
 ```javascript
-import WordpressDataSource from 'relaks-wordpress-data-source';
+import { WordpressDataSource } from 'relaks-wordpress-data-source';
 
 let options = {
-    baseURL: 'http://localhost/wp-json',
-    refreshInterval: 60 * 1000,
+  baseURL: 'http://localhost/wp-json',
+  refreshInterval: 60 * 1000,
 };
 let dataSource = new WordpressDataSource(options);
 dataSource.activate();
@@ -32,26 +32,26 @@ dataSource.activate();
 ```javascript
 /* Root-level React component */
 class FrontEnd extends PureComponent {
-    constructor(props) {
-        super(props);
-        let { dataSource } = props;
-        this.state = {
-            database: new Database(dataSource);
-        }
+  constructor(props) {
+    super(props);
+    let { dataSource } = props;
+    this.state = {
+      database: new Database(dataSource);
     }
+  }
 
-    componentDidMount() {
-        let { dataSource } = this.props;
-        dataSource.addEventListener('change', this.handleDataSourceChange);
-    }
+  componentDidMount() {
+    let { dataSource } = this.props;
+    dataSource.addEventListener('change', this.handleDataSourceChange);
+  }
 
-    /* ... */
+  /* ... */
 
-    handleDataSourceChange = (evt) => {
-        let { dataSource } = this.props;
-        let database = new Database(dataSource);
-        this.setState({ database });
-    }
+  handleDataSourceChange = (evt) => {
+    let { dataSource } = this.props;
+    let database = new Database(dataSource);
+    this.setState({ database });
+  }
 }
 ```
 
