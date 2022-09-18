@@ -371,6 +371,7 @@ class RelaksWordpressDataSource extends EventEmitter {
 
     // create list queries (one usually; two if ids contains a mix of strings and numbers)
     const listPromises = [];
+    let retrievalAttempted = false;
     for (let byX of [ byID, bySlug ]) {
       if (byX.ids.length > 0) {
         const listURL = attachURLParameter(absURL, byX.urlParam, byX.ids);
@@ -405,6 +406,8 @@ class RelaksWordpressDataSource extends EventEmitter {
           }
           this.queries.push(query);
           listPromises.push(query.promise);
+        } else {
+          retrievalAttempted = true;
         }
       }
     }
@@ -425,7 +428,7 @@ class RelaksWordpressDataSource extends EventEmitter {
 
     // see whether partial result set should be immediately returned
     const minimum = getMinimum(options, ids.length, ids.length);
-    if (cached < minimum) {
+    if (cached < minimum && !retrievalAttempted) {
       return completeListPromise;
     } else {
       // return partial list--the list query will issue change event
